@@ -15,7 +15,7 @@ export const Skills = () => {
           <img src={dev} alt="I’m Daniel and I’m a fullstack developer!" />
         </Thumbnail>
         <Details theme={theme}>
-          <h1>More about me</h1>
+          <h1>About Me</h1>
           <p>
             I'm a student studying computer science at the University of Toronto. I'm graduating in December of 2021 and am open to new graduate opportunities!
           </p>
