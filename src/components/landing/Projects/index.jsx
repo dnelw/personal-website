@@ -10,30 +10,31 @@ export const Projects = () => {
   const { theme } = useContext(ThemeContext);
   const {
     github: {
-      viewer: {
-        repositories: { edges },
+      user: {
+        pinnedItems: { edges },
       },
     },
   } = useStaticQuery(
     graphql`
       {
         github {
-          viewer {
-            repositories(first: 8, orderBy: { field: STARGAZERS, direction: DESC }) {
+          user(login: "dnelw") {
+            pinnedItems(first: 6) {
               edges {
                 node {
-                  id
-                  name
-                  url
-                  description
-                  stargazers {
-                    totalCount
-                  }
-                  forkCount
-                  languages(first: 3) {
-                    nodes {
-                      id,
-                      name
+                  ... on GitHub_Repository {
+                    id
+                    name
+                    url
+                    description
+                    stargazerCount
+                    forkCount
+                    languages(first: 3, orderBy: {field: SIZE, direction: DESC}) {
+                      edges {
+                        node {
+                          id
+                        }
+                      }
                     }
                   }
                 }
@@ -59,7 +60,7 @@ export const Projects = () => {
                 <Stats theme={theme}>
                   <div>
                     <Star color={theme === "light" ? "#000" : "#fff"} />
-                    <span>{node.stargazers.totalCount}</span>
+                    <span>{node.stargazerCount}</span>
                   </div>
                   <div>
                     <Fork color={theme === "light" ? "#000" : "#fff"} />
@@ -69,7 +70,7 @@ export const Projects = () => {
                 <Stats theme={theme}>
                   <Languages>
                     {
-                      node.languages.nodes.map(({ id, name }) => (
+                      node.languages.edges.map(({ id, name }) => (
                         <span key={id}>
                           {name}
                         </span>
