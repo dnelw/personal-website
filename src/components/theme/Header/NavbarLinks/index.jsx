@@ -3,6 +3,7 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { ThemeContext } from 'providers/ThemeProvider';
 import ToggleTheme from 'components/theme/Header/ToggleTheme';
 import { Wrapper } from './styles';
+import resume from "../../../../assets/media/ResumeNoPhone.pdf";
 
 const NavbarLinks = ({ desktop }) => {
   const { theme } = useContext(ThemeContext);
@@ -13,6 +14,7 @@ const NavbarLinks = ({ desktop }) => {
       <AnchorLink href="#experience">Work Experience</AnchorLink>
       <AnchorLink href="#projects">Projects</AnchorLink>
       <AnchorLink href="#contact">Contact</AnchorLink>
+      <a href={resume}>Resume</a>
       <ToggleTheme />
     </Wrapper>
   )
